@@ -1,0 +1,19 @@
+version: '3'
+services:
+  angular:
+    image: rockstban/app-esteban:latest
+    labels:
+      - traefik.http.routers.angular.rule=Host(`angular.estebanpro.online`)
+      - traefik.http.routers.angular.tls=true
+      - traefik.http.routers.angular.tls.certresolver=lets-encrypt
+      - traefik.port=80
+    networks:
+      - internal
+      - web
+    ports:
+      - 3000:3000
+networks:
+  web:
+    external: true
+  internal:
+    driver: bridge
